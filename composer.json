@@ -1,0 +1,37 @@
+{
+    "name": "tumtum/oxid-inline-translator",
+    "type": "oxideshop-module",
+    "description": "OXID eShop Module Translate the Shop by click on text",
+    "keywords": ["oxid", "modules", "eShop"],
+    "license": [
+        "proprietary"
+    ],
+    "require": {
+        "nikic/php-parser": "^3.1"
+    },
+    "require-dev": {
+        "phpspec/phpspec": ">2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "tm\\InlineTranslator\\": "../../../source/modules/tm/InlineTranslator"
+        }
+    },
+    "extra": {
+        "oxideshop": {
+            "blacklist-filter": [
+                "composer.json",
+                "README.md",
+                "LICENSE",
+                "CHANGELOG.md"
+            ],
+            "target-directory": "tm/InlineTranslator"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tobias Matthaiou",
+            "email": "225997+TumTum@users.noreply.github.com"
+        }
+    ]
+}
