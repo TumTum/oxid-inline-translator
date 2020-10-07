@@ -1,0 +1,5 @@
+suites:
+  default:
+    namespace: "tm\\InlineTranslator"
+    psr4_prefix: "tm\\InlineTranslator"
+    src_path: "./"
