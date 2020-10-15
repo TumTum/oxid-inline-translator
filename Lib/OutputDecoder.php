@@ -17,7 +17,7 @@ class OutputDecoder
     public function decode($output)
     {
         $decodet_output = trim($output);
-        $decodet_output = preg_replace_callback('~(.|\n|\r\n)\[(tmtrans|tmident)\]([^/]+)\[/\2\]~', [$this, 'convertTag'], $decodet_output);
+        $decodet_output = preg_replace_callback('~(.|\n|\r\n)?\[(tmtrans|tmident)\]([^/]+)\[/\2\]~', [$this, 'convertTag'], $decodet_output);
 
         if ($decodet_output === null) {
             $errorMsg = array_flip(get_defined_constants(true)['pcre'])[preg_last_error()];
