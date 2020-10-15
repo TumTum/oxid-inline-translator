@@ -1,0 +1,11 @@
+language: php
+php:
+  - '7.2'
+
+before_script:
+  - FIX_AUTOLOADER=$(jq '.autoload["psr-4"]["tm\\InlineTranslator\\"] = "./"' composer.json)
+  - echo $FIX_AUTOLOADER > composer.json
+  - composer install
+
+script:
+  - ./vendor/bin/phpspec run --no-code-generation --no-interaction -f tap
