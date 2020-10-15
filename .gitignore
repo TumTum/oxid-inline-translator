@@ -49,3 +49,4 @@ fabric.properties
 composer.phar
 /vendor/
 node_modules
+composer.lock
