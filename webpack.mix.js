@@ -1,4 +1,6 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
+const path = require('path');
+const fs = require('fs')
 
 /*
  |--------------------------------------------------------------------------
@@ -11,8 +13,15 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('out/src/js/tmTranslator.js', 'out/dist/')
+mix.js('out/src/js/tmTranslator.js', 'out/dist/');
+mix.js('out/src/js/tmTranslateErrorEditor.js', 'out/dist/');
 mix.less('out/src/less/tmTranslator.less', 'out/dist/');
+
+const local_config = path.resolve('./webpack.local.mix.js');
+if (fs.existsSync(local_config)) {
+    const local_config_js = require(local_config);
+    local_config_js(mix);
+}
 
 // Full API
 // mix.js(src, output);
