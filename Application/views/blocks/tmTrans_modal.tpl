@@ -48,5 +48,10 @@
         </div>
     </div>
 </div>
-
+<!-- End Tranlate Modal -->
+<!-- Button to Open Translate Menue -->
+<div style="position: fixed; z-index: 89999; bottom: 10px; right: 10px; font-size: 9px">
+    <a href="/?cl=tmTranslateErrors" target="_translate_error_page" style="padding: 2px 10px; background-color: hotpink;">Translate error messages</a>
+</div>
+<!-- ende -->
 [{$smarty.block.parent}]
