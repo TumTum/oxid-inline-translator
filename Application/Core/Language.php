@@ -49,6 +49,19 @@ class Language extends Language_parent
     }
 
     /**
+     * Original Funktion aufruf
+     *
+     * @param $sStringToTranslate
+     * @param null $iLang
+     * @param null $blAdminMode
+     * @return mixed
+     */
+    public function originTranslateString($sStringToTranslate, $iLang = null, $blAdminMode = null)
+    {
+        return parent::translateString($sStringToTranslate, $iLang, $blAdminMode);
+    }
+
+    /**
      * @param $blAdmin
      * @param $iLang
      * @param $aLangFiles
@@ -133,6 +146,24 @@ class Language extends Language_parent
             }
         }
         return false;
+    }
+
+    /**
+     * Key muss irgenwo drinnen stehen
+     * @param $aData
+     * @param $sKey
+     * @param array $aCollection
+     * @return array|mixed
+     */
+    protected function _collectSimilar($aData, $sKey, $aCollection = [])
+    {
+        foreach ($aData as $sValKey => $sValue) {
+            if (stripos($sValKey, $sKey) !== false) {
+                $aCollection[$sValKey] = $sValue;
+            }
+        }
+
+        return $aCollection;
     }
 }
 

@@ -21,8 +21,11 @@ $aModule = array(
     ],
     'controllers'         => [
         'tmTranslator'  => \tm\InlineTranslator\Application\Controller\TranslatorController::class,
+        'tmTranslateErrors'  => \tm\InlineTranslator\Application\Controller\TranslateErrorsController::class
     ],
-    'templates'     => [],
+    'templates'     => [
+        'translate_errors_page.tpl' => 'tm/InlineTranslator/Application/views/tpl/translate_errors_page.tpl'
+    ],
     'blocks'        => [
         [
             'template' => 'layout/base.tpl',
