@@ -50,3 +50,4 @@ composer.phar
 /vendor/
 node_modules
 composer.lock
+webpack.local.mix.js
