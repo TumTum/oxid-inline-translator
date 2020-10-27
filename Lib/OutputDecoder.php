@@ -17,18 +17,23 @@ class OutputDecoder
     public function decode($output)
     {
         $decodet_output = trim($output);
-        $decodet_output = preg_replace_callback('~(.|\n|\r\n)?\[(tmtrans|tmident)\]([^/]+)\[/\2\]~', [$this, 'convertTag'], $decodet_output);
 
-        if ($decodet_output === null) {
-            $errorMsg = array_flip(get_defined_constants(true)['pcre'])[preg_last_error()];
-            getLogger()->error(
-                "Module-Error-InlineTranslator: incorrect output. preg_last_error: $errorMsg",
-                ['package' => 'module_tm_InlineTranslator']
-            );
-            $decodet_output = $output;
-        }
+        $decodet_output = $this->convertTmTags($decodet_output) ? : $output;
+        $decodet_output = $this->removeTagsFromWrongPlaces($decodet_output) ? : $output;
 
         return $decodet_output;
+    }
+
+    /**
+     * @param string $decodet_output
+     * @param string $output
+     * @return string|bool
+     */
+    public function convertTmTags(string $decodet_output)
+    {
+        $decodet_output = preg_replace_callback('~(.|\n|\r\n)?\[(tmtrans|tmident)\]([^/]+)\[/\2\]~', [$this, 'convertTag'], $decodet_output);
+
+        return $this->hasPregError() ? false : $decodet_output;
     }
 
     /**
@@ -62,5 +67,52 @@ class OutputDecoder
 
 
         return $converted;
+    }
+
+    /**
+     * @param string $decodet_output
+     * @return string|bool
+     */
+    public function removeTagsFromWrongPlaces($decodet_output)
+    {
+        $wrongplaces = [
+            '~<html lang=(["\'])([^\1]+?)\1~i',
+            '~<body class=(["\'])([^\1]+?)\1~i',
+        ];
+
+        $decodet_output = preg_replace_callback($wrongplaces, [$this, 'stripTags'], $decodet_output, 3);
+
+        return $this->hasPregError() ? false : $decodet_output;
+    }
+
+    /**
+     * @param array $matches
+     *
+     * @return string
+     */
+    public function stripTags($matches)
+    {
+        list($content, $quote, $value) = $matches;
+        $strip_tags = strip_tags($value);
+
+        return str_replace($value, $strip_tags, $content);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function hasPregError()
+    {
+        if (preg_last_error()) {
+            $errorMsg = array_flip(get_defined_constants(true)['pcre'])[preg_last_error()];
+            getLogger()->error(
+                "Module-Error-InlineTranslator: incorrect output. convertTmTags preg_last_error: $errorMsg",
+                ['package' => 'module_tm_InlineTranslator']
+            );
+
+            return true;
+        }
+
+        return false;
     }
 }

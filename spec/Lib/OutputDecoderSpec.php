@@ -59,6 +59,14 @@ class OutputDecoderSpec extends ObjectBehavior
         $this->decode($actual)->shouldBe($expect);
     }
 
+    public function it_remove_in_tag_html()
+    {
+        $actual = self::c('HMTL_Tag_attribute.html');
+        $expect = self::c('HMTL_Tag_attribute_expect.html');
+
+        $this->decode($actual)->shouldBe($expect);
+    }
+
     private static function c($filename)
     {
         return trim(file_get_contents(__DIR__ . '/../clam/'.$filename));
