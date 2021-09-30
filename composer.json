@@ -7,7 +7,7 @@
         "proprietary"
     ],
     "require": {
-        "nikic/php-parser": "^3.1"
+        "nikic/php-parser": "@stable"
     },
     "require-dev": {
         "phpspec/phpspec": ">2.0",
@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "tm\\InlineTranslator\\": "../../../source/modules/tm/InlineTranslator"
+            "tm\\InlineTranslator\\": "./"
         }
     },
     "extra": {
