@@ -86,7 +86,7 @@ class TranslatorController extends FrontendController
 
     protected function getCMS($ident)
     {
-        $data = ['content' => '', 'error' => ''];
+        $data = ['content' => [], 'error' => ''];
         /** @var oxContent $oxContent */
         $oxContent = oxNew(oxContent::class);
         if ($oxContent->loadByIdent($ident)) {
