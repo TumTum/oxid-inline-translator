@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "tm\\InlineTranslator\\": "./"
+            "tm\\InlineTranslator\\": "../../../source/modules/tm/InlineTranslator"
         }
     },
     "extra": {
