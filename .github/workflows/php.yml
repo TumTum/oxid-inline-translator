@@ -1,0 +1,33 @@
+name: oxid-inline-translator
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      run: |
+        FIX_AUTOLOADER=$(jq '.autoload["psr-4"]["tm\\InlineTranslator\\"] = "./"' composer.json)
+        echo $FIX_AUTOLOADER > composer.json
+        composer install --prefer-dist --no-progress
+
+    - name: Run test suite
+      run: ./vendor/bin/phpspec run --no-code-generation --no-interaction -f tap

@@ -1,7 +1,7 @@
 Inline Translator
 =================
 
-[![Build Status](https://travis-ci.org/TumTum/oxid-inline-translator.svg?branch=main)](https://travis-ci.org/TumTum/oxid-inline-translator)
+![Build Status](https://github.com/TumTum/oxid-inline-translator/actions/workflows/php.yml/badge.svg)
 
 Dieses Module hilft den OXID eShop auf der Web Obfläche zu übersetzten.
 
