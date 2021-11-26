@@ -16,6 +16,7 @@ const fs = require('fs')
 mix.js('out/src/js/tmTranslator.js', 'out/dist/');
 mix.js('out/src/js/tmTranslateErrorEditor.js', 'out/dist/');
 mix.less('out/src/less/tmTranslator.less', 'out/dist/');
+mix.vue()
 
 const local_config = path.resolve('./webpack.local.mix.js');
 if (fs.existsSync(local_config)) {

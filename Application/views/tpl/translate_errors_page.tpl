@@ -24,6 +24,6 @@
         </v-footer>
     </v-app>
 </section>
-<script src="[{$oViewConf->getModuleUrl("tmInlineTranslator", "out/dist/tmTranslateErrorEditor.js")}]?v1.0"></script>
+<script src="[{$oViewConf->getModuleUrl("tmInlineTranslator", "out/dist/tmTranslateErrorEditor.js")}]?v1.1"></script>
 </body>
 </html>
